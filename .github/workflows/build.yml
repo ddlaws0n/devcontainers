@@ -40,6 +40,7 @@ jobs:
       packages: write
       id-token: write
       attestations: write
+      security-events: write
     outputs:
       image-digest: ${{ steps.push.outputs.digest }}
     steps:
@@ -91,13 +92,6 @@ jobs:
           format: sarif
           output: trivy-base.sarif
 
-      - name: Upload Trivy SARIF
-        if: github.event_name != 'pull_request' && always()
-        uses: github/codeql-action/upload-sarif@7fd177fa680c9881b53cdab4d346d32574c9f7f4 # v3
-        with:
-          sarif_file: trivy-base.sarif
-          category: trivy-base
-
       - name: Install cosign
         if: github.event_name != 'pull_request'
         uses: sigstore/cosign-installer@398d4b0eeef1380460a10c8013a76f728fb906ac # v3
@@ -120,6 +114,17 @@ jobs:
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
 
+      # SARIF upload runs last and non-blocking: a reporting hiccup must not
+      # gate signing or provenance. Trivy already failed the job above on
+      # HIGH/CRITICAL, so the scan itself is the supply-chain gate.
+      - name: Upload Trivy SARIF
+        if: github.event_name != 'pull_request' && always()
+        continue-on-error: true
+        uses: github/codeql-action/upload-sarif@68bde559dea0fdcac2102bfdf6230c5f70eb485e # v4
+        with:
+          sarif_file: trivy-base.sarif
+          category: trivy-base
+
   build-children:
     name: ${{ matrix.image }}
     needs: build-base
@@ -129,6 +134,7 @@ jobs:
       packages: write
       id-token: write
       attestations: write
+      security-events: write
     strategy:
       fail-fast: false
       matrix:
@@ -190,13 +196,6 @@ jobs:
           format: sarif
           output: trivy-${{ matrix.image }}.sarif
 
-      - name: Upload Trivy SARIF
-        if: github.event_name != 'pull_request' && always()
-        uses: github/codeql-action/upload-sarif@7fd177fa680c9881b53cdab4d346d32574c9f7f4 # v3
-        with:
-          sarif_file: trivy-${{ matrix.image }}.sarif
-          category: trivy-${{ matrix.image }}
-
       - name: Install cosign
         if: github.event_name != 'pull_request'
         uses: sigstore/cosign-installer@398d4b0eeef1380460a10c8013a76f728fb906ac # v3
@@ -218,3 +217,11 @@ jobs:
           subject-name: ${{ env.REGISTRY }}/${{ env.OWNER }}/devcontainer-${{ matrix.image }}
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
+
+      - name: Upload Trivy SARIF
+        if: github.event_name != 'pull_request' && always()
+        continue-on-error: true
+        uses: github/codeql-action/upload-sarif@68bde559dea0fdcac2102bfdf6230c5f70eb485e # v4
+        with:
+          sarif_file: trivy-${{ matrix.image }}.sarif
+          category: trivy-${{ matrix.image }}
