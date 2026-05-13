@@ -1,0 +1,30 @@
+# devcontainer compose — TypeScript/JavaScript
+#
+# Tailscale opt-in: copy compose.override.yaml.example to compose.override.yaml.
+# docker compose merges compose.override.yaml automatically when present.
+
+name: ${COMPOSE_PROJECT_NAME:-tsjs-devcontainer}
+
+services:
+  dev:
+    image: ghcr.io/ddlaws0n/devcontainer-tsjs:latest
+    init: true
+    command: sleep infinity
+    user: vscode
+    working_dir: /workspace
+    volumes:
+      - ..:/workspace:cached
+      - claude-config:/home/vscode/.claude
+      - bun-cache:/home/vscode/.bun/install/cache
+      - npm-cache:/home/vscode/.npm
+      - pnpm-store:/home/vscode/.local/share/pnpm/store
+    environment:
+      CLAUDE_CONFIG_DIR: /home/vscode/.claude
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  claude-config:
+  bun-cache:
+  npm-cache:
+  pnpm-store:

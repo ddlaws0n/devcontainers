@@ -1,0 +1,33 @@
+# macOS
+.DS_Store
+
+# Claude Code session logs
+.claude/
+
+# Editor
+.vscode/*.local.*
+.idea/
+
+# Personal opt-in compose overrides (Tailscale, NordVPN, etc.)
+# The .example versions ARE committed; the live files stay local.
+compose.tailscale.yaml
+compose.*.local.yaml
+
+# Secrets / env
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+# Build artifacts
+*.sbom.json
+*.sbom.spdx.json
+trivy-results.*
+
+# Conversation/transcript exports (Claude Code /export, etc.)
+*-spin-up-*.txt
+20[0-9][0-9]-[0-9][0-9]-[0-9][0-9]-*.txt
+
+# Claude Code session logs
+.claude/logs/

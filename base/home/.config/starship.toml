@@ -1,0 +1,51 @@
+# Minimal starship config tuned for devcontainer use.
+# Show: directory, git branch+status, language version when in a project, command duration on long runs.
+
+add_newline = false
+command_timeout = 1000
+
+format = """
+$directory\
+$git_branch\
+$git_status\
+$python\
+$nodejs\
+$bun\
+$cmd_duration\
+$line_break\
+$character"""
+
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+style = "bold cyan"
+
+[git_branch]
+symbol = " "
+style = "bold purple"
+
+[git_status]
+style = "yellow"
+
+[python]
+symbol = "py "
+format = '[$symbol($version )]($style)'
+style = "yellow"
+
+[nodejs]
+symbol = "node "
+format = '[$symbol($version )]($style)'
+style = "green"
+
+[bun]
+symbol = "bun "
+format = '[$symbol($version )]($style)'
+style = "magenta"
+
+[cmd_duration]
+min_time = 2000
+style = "dim yellow"
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"

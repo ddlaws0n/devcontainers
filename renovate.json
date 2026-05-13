@@ -1,0 +1,111 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    "helpers:pinGitHubActionDigests",
+    "docker:pinDigests",
+    ":dependencyDashboard",
+    ":semanticCommits"
+  ],
+  "timezone": "UTC",
+  "schedule": ["before 6am on monday"],
+  "prHourlyLimit": 4,
+  "prConcurrentLimit": 10,
+  "labels": ["dependencies"],
+  "rangeStrategy": "pin",
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 6am on monday"]
+  },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Pin tool versions declared as ARGs in Dockerfiles",
+      "fileMatch": ["(^|/)Dockerfile$", "(^|/)Dockerfile\\..+$"],
+      "matchStrings": [
+        "#\\s*renovate:\\s*datasource=(?<datasource>[a-z-]+?)\\s+depName=(?<depName>\\S+?)(?:\\s+versioning=(?<versioning>\\S+))?\\s*\\n\\s*ARG\\s+\\S+?=\"?(?<currentValue>[^\"\\s]+)\"?"
+      ]
+    }
+  ],
+  "packageRules": [
+    {
+      "description": "Group Wolfi/Chainguard base image digest bumps",
+      "matchPackageNames": ["cgr.dev/chainguard/wolfi-base"],
+      "groupName": "wolfi-base"
+    },
+    {
+      "description": "Group GitHub Actions digest bumps",
+      "matchManagers": ["github-actions"],
+      "groupName": "github actions",
+      "automerge": false
+    },
+    {
+      "description": "Group Astral tools (uv, ruff, ty)",
+      "matchPackageNames": [
+        "astral-sh/uv",
+        "ruff",
+        "astral-sh/ty",
+        "ghcr.io/astral-sh/uv"
+      ],
+      "groupName": "astral tools"
+    },
+    {
+      "description": "Group Anthropic / coding agents",
+      "matchPackageNames": [
+        "@anthropic-ai/claude-code",
+        "@earendil-works/pi-coding-agent"
+      ],
+      "groupName": "coding agents"
+    },
+    {
+      "description": "Group JS toolchain (bun, biome, vtsls, tsx)",
+      "matchPackageNames": [
+        "oven-sh/bun",
+        "@biomejs/biome",
+        "@vtsls/language-server",
+        "tsx"
+      ],
+      "groupName": "js toolchain"
+    },
+    {
+      "description": "Auto-merge minor + patch updates for first-party tooling",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "matchPackageNames": [
+        "cgr.dev/chainguard/wolfi-base",
+        "ghcr.io/astral-sh/uv",
+        "astral-sh/uv",
+        "ruff",
+        "pre-commit",
+        "pip-audit",
+        "@biomejs/biome",
+        "@vtsls/language-server",
+        "tsx",
+        "pnpm",
+        "yarn"
+      ],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true
+    },
+    {
+      "description": "Always require review for major bumps",
+      "matchUpdateTypes": ["major"],
+      "automerge": false,
+      "addLabels": ["major-update"]
+    },
+    {
+      "description": "Coding agents always require review (security-sensitive)",
+      "matchPackageNames": [
+        "@anthropic-ai/claude-code",
+        "@earendil-works/pi-coding-agent"
+      ],
+      "automerge": false,
+      "addLabels": ["agent-update"]
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "labels": ["security"],
+    "automerge": false
+  },
+  "osvVulnerabilityAlerts": true
+}

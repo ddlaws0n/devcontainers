@@ -1,0 +1,46 @@
+{
+  "$schema": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainer.schema.json",
+  "name": "python",
+  "dockerComposeFile": ["compose.yaml"],
+  "service": "dev",
+  "remoteUser": "vscode",
+  "workspaceFolder": "/workspace",
+  "shutdownAction": "stopCompose",
+  "postCreateCommand": "if [ -f pyproject.toml ]; then uv sync --frozen --all-groups || uv sync --all-groups; fi",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "anthropic.claude-code",
+        "ms-python.python",
+        "ms-python.debugpy",
+        "detachhead.basedpyright",
+        "charliermarsh.ruff",
+        "astral-sh.ty",
+        "tamasfe.even-better-toml"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+        "python.languageServer": "None",
+        "basedpyright.analysis.typeCheckingMode": "standard",
+        "ruff.nativeServer": "on",
+        "[python]": {
+          "editor.defaultFormatter": "charliermarsh.ruff",
+          "editor.formatOnSave": true,
+          "editor.codeActionsOnSave": {
+            "source.fixAll.ruff": "explicit",
+            "source.organizeImports.ruff": "explicit"
+          }
+        },
+        "files.exclude": {
+          "**/__pycache__": true,
+          "**/.ruff_cache": true,
+          "**/.pytest_cache": true
+        }
+      }
+    },
+    "zed": {
+      "extensions": []
+    }
+  }
+}

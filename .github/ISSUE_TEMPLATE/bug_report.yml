@@ -1,0 +1,79 @@
+name: Bug report
+description: Something is broken in an image, the CI workflow, or a template.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. Please pin down which image and digest you hit the bug on — it makes everything faster.
+
+  - type: dropdown
+    id: image
+    attributes:
+      label: Which image / area?
+      options:
+        - devcontainer-base
+        - devcontainer-python
+        - devcontainer-tsjs
+        - CI workflow (.github/workflows/build.yml)
+        - verify-image.sh / signing & attestation
+        - Devcontainer templates
+        - Docs
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: digest
+    attributes:
+      label: Image digest (if applicable)
+      description: "Output of `docker inspect --format '{{index .RepoDigests 0}}' <image>`. Omit if not image-related."
+      placeholder: "ghcr.io/ddlaws0n/devcontainer-base@sha256:..."
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What you did, what you expected, what you saw instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction steps
+      description: Minimal commands or config. Paste relevant snippets of `devcontainer.json`, `compose.yaml`, or build logs.
+      render: shell
+    validations:
+      required: true
+
+  - type: input
+    id: host
+    attributes:
+      label: Host OS and architecture
+      placeholder: "macOS 15.4 arm64 / Ubuntu 24.04 amd64"
+
+  - type: input
+    id: editor
+    attributes:
+      label: Editor / runner
+      placeholder: "VSCode 1.95.0 / Zed 0.180.0 / docker compose 2.30.0"
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs
+      description: Build output, container start logs, or verify-image.sh output. Trim secrets first.
+      render: shell
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-flight
+      options:
+        - label: I'm pulling by `@sha256:` digest (or noted above why I'm not).
+          required: false
+        - label: I ran `scripts/verify-image.sh` against the image and it passed.
+          required: false
+        - label: I searched existing issues and didn't find a duplicate.
+          required: true

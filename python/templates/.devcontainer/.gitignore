@@ -1,0 +1,6 @@
+# Personal opt-in compose overrides — never commit.
+compose.override.yaml
+compose.*.local.yaml
+.env
+.env.*
+!.env.example

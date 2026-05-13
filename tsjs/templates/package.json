@@ -1,0 +1,19 @@
+{
+  "name": "your-project",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsgo --noEmit",
+    "typecheck:compat": "tsc --noEmit",
+    "format": "biome format --write .",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "audit": "bun audit --audit-level=high"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.4.15",
+    "@typescript/native-preview": "*",
+    "typescript": "^5.8.0"
+  }
+}

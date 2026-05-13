@@ -1,0 +1,50 @@
+name: Feature request
+description: Suggest a new tool, template change, or hardening improvement.
+labels: ["enhancement"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which image / area?
+      options:
+        - devcontainer-base
+        - devcontainer-python
+        - devcontainer-tsjs
+        - CI workflow / signing / SBOM
+        - Devcontainer templates
+        - Docs
+        - New image
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: The use case, not the implementation. What are you trying to do?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Concrete change you'd make — a package to add, a template tweak, a workflow step. Optional.
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Other approaches you ruled out and why.
+
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope check
+      options:
+        - label: This belongs in the shared image, not a per-project Dockerfile.
+          required: false
+        - label: This won't pull in apt/Debian assumptions (Wolfi is apk-based, glibc).
+          required: false
+        - label: Any new binary will be installed with a SHA-256 check or pinned package version.
+          required: false

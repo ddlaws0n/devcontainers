@@ -1,0 +1,28 @@
+# devcontainer compose — Python
+#
+# Tailscale opt-in: copy compose.override.yaml.example to compose.override.yaml.
+# docker compose merges compose.override.yaml automatically when present.
+
+name: ${COMPOSE_PROJECT_NAME:-python-devcontainer}
+
+services:
+  dev:
+    image: ghcr.io/ddlaws0n/devcontainer-python:latest
+    init: true
+    command: sleep infinity
+    user: vscode
+    working_dir: /workspace
+    volumes:
+      - ..:/workspace:cached
+      - claude-config:/home/vscode/.claude
+      - uv-cache:/home/vscode/.cache/uv
+      - uv-python:/home/vscode/.local/share/uv/python
+    environment:
+      CLAUDE_CONFIG_DIR: /home/vscode/.claude
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  claude-config:
+  uv-cache:
+  uv-python:

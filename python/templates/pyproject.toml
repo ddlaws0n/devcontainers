@@ -1,0 +1,56 @@
+# Example pyproject.toml for projects using devcontainer-python.
+# Copy to your project root and adapt the [project] section.
+
+[project]
+name = "your-project"
+version = "0.0.0"
+description = ""
+requires-python = ">=3.13"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "basedpyright>=1.20",
+    "ty",
+    "pytest>=8",
+    "pytest-cov>=5",
+]
+
+[tool.uv]
+# Block packages uploaded in the last 7 days — typosquat defense.
+exclude-newer = "7 days"
+# Force lockfile hash verification on every sync.
+required-version = ">=0.11"
+
+[tool.ruff]
+line-length = 88
+target-version = "py314"
+extend-exclude = [".venv", "build", "dist"]
+
+[tool.ruff.lint]
+select = [
+    "E", "F", "W",      # pycodestyle + pyflakes
+    "I",                # isort
+    "UP",               # pyupgrade
+    "B",                # bugbear
+    "SIM", "RET", "C4", # readability
+    "PTH",              # pathlib over os.path
+]
+ignore = ["E501"]       # line length handled by formatter
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.basedpyright]
+# Workspace-wide type checking with stricter-than-pyright defaults.
+typeCheckingMode = "standard"
+include = ["src", "tests"]
+exclude = ["**/__pycache__", ".venv", "build", "dist"]
+
+[tool.ty]
+# ty is a beta type checker — run it alongside basedpyright for fast incremental
+# feedback in the editor. basedpyright remains the source of truth in CI.
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-markers"
+testpaths = ["tests"]

@@ -1,0 +1,17 @@
+# Example bunfig.toml for projects using devcontainer-tsjs.
+# Copy to your project root.
+
+[install]
+# Block packages uploaded in the last 3 days — typosquat defense window.
+minimumReleaseAge = "3 days"
+
+# Empty allowlist means NO postinstall scripts run. Add specific packages here
+# when you genuinely need them (e.g. "esbuild", "sharp", "node-canvas").
+trustedDependencies = []
+
+# Frozen lockfile in non-interactive contexts (CI, devcontainer postCreate).
+frozenLockfile = false
+
+[install.cache]
+# Honor the per-user $BUN_INSTALL cache dir set by the image.
+disable = false

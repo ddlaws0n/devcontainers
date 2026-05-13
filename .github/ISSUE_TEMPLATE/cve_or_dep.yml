@@ -1,0 +1,49 @@
+name: CVE or dependency issue
+description: Flag a CVE, supply-chain concern, or stuck dependency update.
+labels: ["security", "dependencies"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **If this is an unpatched vulnerability in these images themselves, do NOT use this template.** Report it privately via the [Security Advisories page](https://github.com/ddlaws0n/devcontainers/security/advisories/new) — see SECURITY.md.
+
+        Use this template for: public CVEs in pinned dependencies, Renovate PRs that need a human, or supply-chain hardening gaps.
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of issue?
+      options:
+        - Public CVE in a pinned dependency
+        - Renovate PR is stuck or wrong
+        - Supply-chain hardening gap
+        - Trivy is flagging something we should address
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: cve
+    attributes:
+      label: CVE / advisory ID (if applicable)
+      placeholder: "CVE-2026-XXXXX or GHSA-xxxx-xxxx-xxxx"
+
+  - type: input
+    id: package
+    attributes:
+      label: Affected package and version
+      placeholder: "openssl 3.4.0-r0 in base"
+
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: Link to the advisory, the Trivy/Renovate output, and any context on impact in our usage.
+    validations:
+      required: true
+
+  - type: textarea
+    id: fix
+    attributes:
+      label: Known fix / mitigation
+      description: Upstream patched version, workaround, or whether we have to wait.
