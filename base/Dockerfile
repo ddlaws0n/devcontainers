@@ -18,7 +18,7 @@ FROM ${WOLFI_BASE_REF} AS base
 # renovate-friendly tool versions. Update these via Renovate or by hand.
 ARG NODE_PACKAGE=nodejs-24
 # renovate: datasource=npm depName=@anthropic-ai/claude-code
-ARG CLAUDE_CODE_VERSION=2.1.140
+ARG CLAUDE_CODE_VERSION=2.1.163
 # renovate: datasource=npm depName=@earendil-works/pi-coding-agent
 ARG PI_AGENT_VERSION=0.74.0
 
