@@ -20,7 +20,7 @@ ARG NODE_PACKAGE=nodejs-24
 # renovate: datasource=npm depName=@anthropic-ai/claude-code
 ARG CLAUDE_CODE_VERSION=2.1.140
 # renovate: datasource=npm depName=@earendil-works/pi-coding-agent
-ARG PI_AGENT_VERSION=0.74.0
+ARG PI_AGENT_VERSION=0.79.0
 
 ARG USERNAME=vscode
 ARG USER_UID=1000
