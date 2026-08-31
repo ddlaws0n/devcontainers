@@ -25,7 +25,7 @@ ARG RUFF_VERSION=0.15.12
 # renovate: datasource=pypi depName=pre-commit
 ARG PRECOMMIT_VERSION=4.6.0
 # renovate: datasource=pypi depName=pip-audit
-ARG PIPAUDIT_VERSION=2.10.0
+ARG PIPAUDIT_VERSION=2.10.1
 
 ARG PYTHON_VERSION=3.14
 ARG PYTHON_FALLBACK_VERSION=3.13
