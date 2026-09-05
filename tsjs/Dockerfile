@@ -19,7 +19,7 @@ ARG VTSLS_VERSION=0.3.0
 # renovate: datasource=npm depName=tsx
 ARG TSX_VERSION=4.21.0
 # renovate: datasource=npm depName=pnpm
-ARG PNPM_VERSION=11.1.1
+ARG PNPM_VERSION=11.11.0
 # renovate: datasource=npm depName=yarn
 ARG YARN_VERSION=1.22.22
 
