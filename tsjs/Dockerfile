@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1.7
+# syntax=docker/dockerfile:1.7@sha256:a57df69d0ea827fb7266491f2813635de6f17269be881f696fbfdf2d83dda33e
 #
 # TypeScript / JavaScript devcontainer image
 # - Extends devcontainer-base (Wolfi, has nodejs-24 + npm)
@@ -7,7 +7,7 @@
 #
 # Versions are pinned and Renovate-managed.
 
-ARG BASE_IMAGE=ghcr.io/ddlaws0n/devcontainer-base:latest
+ARG BASE_IMAGE=ghcr.io/ddlaws0n/devcontainer-base:latest@sha256:3f48415ddafaeeabb8e5baf2b273730dfa6998c791fccdcad6e859cbccfe08f7
 FROM ${BASE_IMAGE} AS tsjs
 
 # renovate: datasource=github-releases depName=oven-sh/bun
