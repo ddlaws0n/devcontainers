@@ -7,7 +7,7 @@ name: ${COMPOSE_PROJECT_NAME:-python-devcontainer}
 
 services:
   dev:
-    image: ghcr.io/ddlaws0n/devcontainer-python:latest
+    image: ghcr.io/ddlaws0n/devcontainer-python:latest@sha256:deb4a6530e772ef5d1037232cb1a07fadb99d86f805b26d11a5818cb33352a94
     init: true
     command: sleep infinity
     user: vscode
