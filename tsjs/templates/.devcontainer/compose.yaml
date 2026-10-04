@@ -7,7 +7,7 @@ name: ${COMPOSE_PROJECT_NAME:-tsjs-devcontainer}
 
 services:
   dev:
-    image: ghcr.io/ddlaws0n/devcontainer-tsjs:latest
+    image: ghcr.io/ddlaws0n/devcontainer-tsjs:latest@sha256:5bc22c9e0cdab25e0044198931e70a3f98c28fc3730899a37c604b13c4bfbfc9
     init: true
     command: sleep infinity
     user: vscode
