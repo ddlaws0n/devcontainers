@@ -23,7 +23,7 @@ FROM ${BASE_IMAGE} AS python
 # renovate: datasource=pypi depName=ruff
 ARG RUFF_VERSION=0.15.12
 # renovate: datasource=pypi depName=pre-commit
-ARG PRECOMMIT_VERSION=4.6.0
+ARG PRECOMMIT_VERSION=4.7.0
 # renovate: datasource=pypi depName=pip-audit
 ARG PIPAUDIT_VERSION=2.10.0
 
