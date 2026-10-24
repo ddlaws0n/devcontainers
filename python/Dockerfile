@@ -12,7 +12,7 @@
 # stage that uses them.
 ARG BASE_IMAGE=ghcr.io/ddlaws0n/devcontainer-base:latest
 # renovate: datasource=github-releases depName=astral-sh/uv
-ARG UV_VERSION=0.11.14
+ARG UV_VERSION=0.13.5
 
 # Pin uv via its official image as a named stage — sidesteps the buildkit
 # limitation that ARG substitution in `COPY --from=` only works for stage names.
@@ -21,7 +21,7 @@ FROM ghcr.io/astral-sh/uv:${UV_VERSION} AS uv-bin
 FROM ${BASE_IMAGE} AS python
 
 # renovate: datasource=pypi depName=ruff
-ARG RUFF_VERSION=0.15.12
+ARG RUFF_VERSION=0.17.2
 # renovate: datasource=pypi depName=pre-commit
 ARG PRECOMMIT_VERSION=4.6.0
 # renovate: datasource=pypi depName=pip-audit
