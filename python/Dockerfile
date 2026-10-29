@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1.7
+# syntax=docker/dockerfile:1.7@sha256:a57df69d0ea827fb7266491f2813635de6f17269be881f696fbfdf2d83dda33e
 #
 # Python devcontainer image
 # - Extends devcontainer-base (Wolfi)
@@ -10,7 +10,7 @@
 
 # Global ARGs (resolvable in FROM lines). They must be re-declared inside each
 # stage that uses them.
-ARG BASE_IMAGE=ghcr.io/ddlaws0n/devcontainer-base:latest
+ARG BASE_IMAGE=ghcr.io/ddlaws0n/devcontainer-base:latest@sha256:3f48415ddafaeeabb8e5baf2b273730dfa6998c791fccdcad6e859cbccfe08f7
 # renovate: datasource=github-releases depName=astral-sh/uv
 ARG UV_VERSION=0.11.14
 
