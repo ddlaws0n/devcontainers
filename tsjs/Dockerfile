@@ -13,11 +13,11 @@ FROM ${BASE_IMAGE} AS tsjs
 # renovate: datasource=github-releases depName=oven-sh/bun
 ARG BUN_VERSION=1.3.13
 # renovate: datasource=npm depName=@biomejs/biome
-ARG BIOME_VERSION=2.4.15
+ARG BIOME_VERSION=2.6.4
 # renovate: datasource=npm depName=@vtsls/language-server
 ARG VTSLS_VERSION=0.3.0
 # renovate: datasource=npm depName=tsx
-ARG TSX_VERSION=4.21.0
+ARG TSX_VERSION=4.23.15
 # renovate: datasource=npm depName=pnpm
 ARG PNPM_VERSION=11.1.1
 # renovate: datasource=npm depName=yarn
