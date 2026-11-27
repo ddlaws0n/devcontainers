@@ -11,7 +11,7 @@
 #
 # All upstream digests and tool versions are managed by Renovate.
 
-ARG WOLFI_BASE_REF=cgr.dev/chainguard/wolfi-base:latest
+ARG WOLFI_BASE_REF=cgr.dev/chainguard/wolfi-base:latest@sha256:4cf5932a0f95a88af352f77e4efa67480cab0e1f7a48f0eddca3cce003a7c0fb
 
 FROM ${WOLFI_BASE_REF} AS base
 
